@@ -14,4 +14,4 @@ ax.grid()
 fig.savefig('test.png')
 plt.show()
 
-#print("Hello World")
+print("Hello World")
