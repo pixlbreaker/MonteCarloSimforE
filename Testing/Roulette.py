@@ -34,3 +34,20 @@ class FairRoulette():
     '''
     def __str__(self):
         return 'Fair Roulette'
+
+class EuRoulette(FairRoulette):
+    def __init__(self):
+        FairRoulette.__init__(self)
+        self.pockets.append('0')
+    
+    def __str__(self):
+        return 'European Roulette'
+
+class AmRoulette(EuRoulette):
+
+    def __init__(self):
+        EuRoulette.__init__(self)
+        self.pockets.append('00')
+    
+    def __str__(self):
+        return 'American Roulette'
