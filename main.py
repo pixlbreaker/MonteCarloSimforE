@@ -1,21 +1,34 @@
-import matplotlib
+# Matplotlib imports
 import matplotlib.pyplot as plt
-import numpy as np
-import math
+import matplotlib.animation as animation
+from matplotlib import style
 
+# Calculate Euler import
 import CalculateEuler
 
-# x = np.arange(0.0, 3.0, 0.001)
-# y = x
 
-# fig, ax = plt.subplots()
-# ax.plot(x,y)
-# ax.set(xlabel='time (s)', ylabel='voltage (mV)', title='About as simple as it gets, folks')
-# ax.grid()
+# Change the style
+style.use('fivethirtyeight')
 
-# fig.savefig('test.png')
-# plt.show()
+fig = plt.figure()
+ax1 = fig.add_subplot(1,1,1)
 
+def animate(i):
+    graph_data = open('Testing/sample.txt', 'r').read()
+    lines = graph_data.split('\n')
+    xs =[]
+    ys =[]
+
+    for line in lines:
+        if len(line) > 1:
+            x, y = line.split(',')
+            xs.append(x)
+            ys.append(y)
+    ax1.clear()
+    ax1.plot(xs, ys)
+
+ani = animation.FuncAnimation(fig, animate, interval=1000)
+plt.show()
 
 list = []
 for i in range(0, 1000):
