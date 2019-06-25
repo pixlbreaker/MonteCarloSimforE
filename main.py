@@ -17,8 +17,11 @@ import CalculateEuler
 # plt.show()
 
 
-print("Hello World")
-
-
-
-print(CalculateEuler.CalculateEuler(100))
+list = []
+for i in range(0, 1000):
+    value = CalculateEuler.CalculateEuler(i)
+    list.append(value)
+    print("On run {0} the value is: {1}".format(i, value))
+plt.plot(list)
+plt.show()
+#CalculateEuler.CalculateETest()
