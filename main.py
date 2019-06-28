@@ -23,16 +23,18 @@ def animate(i):
         value = CalculateEuler.CalculateEuler(i)
         xs.append(i+1)
         ys.append(value)
+        ax1.clear()
+        ax1.plot(xs, ys)
         print("On run {0} the value is: {1}".format(i, value))
     # for line in lines:
     #     if len(line) > 1:
     #         x, y = line.split(',')
     #         xs.append(x)
     #         ys.append(y)
-    ax1.clear()
-    ax1.plot(xs, ys)
+    # ax1.clear()
+    # ax1.plot(xs, ys)
 
-ani = animation.FuncAnimation(fig, animate, interval=1000)
+ani = animation.FuncAnimation(fig, animate, interval=100)
 plt.show()
 
 # list = []
