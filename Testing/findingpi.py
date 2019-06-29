@@ -2,7 +2,7 @@ import random
 import math
 
 count_inside = 0
-for count in range(0, 10000):
+for count in range(0, 100000):
     d = math.hypot(random.random(), random.random())
     print('d :' + str(d))
     if d < 1: count_inside += 1

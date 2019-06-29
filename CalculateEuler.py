@@ -7,7 +7,7 @@ def SimulationSum():
     '''
     n = 0
     sum = 0
-    while (sum  < 1):
+    while (sum  <= 1):
         sum += random.uniform(0,1)
         n += 1
     sumMean = np.mean(n)
