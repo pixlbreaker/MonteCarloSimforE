@@ -2,6 +2,7 @@ import statistics
 import random
 import time
 
+e_lst = []
 
 def SimulationSum():
     '''
@@ -26,6 +27,7 @@ def CalculateEuler(n):
     while len(sumlist) != n:
         sumlist.append(SimulationSum())
         e = statistics.mean(sumlist)
+        e_lst.append(e)
         print("On run " + str(len(sumlist)) + " e is " + str(e))
         # Sleeps for 50 ms
         time.sleep(50/1000)
