@@ -1,71 +1,65 @@
-# Matplotlib imports
+# Imports
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
+import threading
+import multiprocessing
+import time
 
 # Calculate Euler import
 import CalculateEuler
 
-# import threading
-import threading
-import time
-
-import statistics
-import random
-
-e_lst = []
-
-def animation_graph():
-    print("This is outside the thread")
-
-def SimulationSum():
-    '''
-    we take a random number from 0 to 1, then we take another one and add it to the first one and so on, while our sum is less than 1. ξ is a quantity of numbers taken. The mean value of ξ is the Euler's number, which is approximately 2,7182818284590452353602874713527…
-    '''
-    sum = 0
-    count = 0
-    while sum < 1:
-
-        # Random value between 0 and 1
-        x = random.uniform(0,1)
-        sum += x
-        count += 1
-    return count
-
-def CalculateEuler(n):
-    '''
-    Runs the simulation function constantly to get the value of e
-    '''
-    sumlist = []
-    e = 0
-    while len(sumlist) != n:
-        sumlist.append(SimulationSum())
-        e = statistics.mean(sumlist)
-        e_lst.append(e)
-        print("On run " + str(len(sumlist)) + " e is " + str(e))
-        # Sleeps for 50 ms
-        time.sleep(50/1000)
-    return e
-
-
+# Creates the figure
+fig = plt.figure()
+ax1 = fig.add_subplot(1,1,1)
 cal = CalculateEuler
-# e = cal.CalculateEuler(1000)
 
-calculation_thread= threading.Thread(target = CalculateEuler(10), args = ())
-calculation_thread.setDaemon(True)
-calculation_thread.start()
+# Creates the subplot
+# def animation_graph():
+#     xs = []
+#     ys = []
+#     count = 0
+#     while count != len(cal.e_lst):
+#         xs.append(float(count))
+#         ys.append(cal.e_lst[count])
+#         ax1.clear()
+        
 
-animation_thread = threading.Thread(target=animation_graph(), args=())
-animation_thread.start()
+#         plt.xlabel('Date')
+#         plt.ylabel('Price')
+#         plt.title('Live graph with matplotlib')
 
-calculation_thread.join()
-animation_thread.join()
+#         count += 1
+#         time.sleep(50/100)
+	
+#     ax1.plot(xs, ys)
+    
+def animation_thread_function():
+    print("Hello")
+    #ani = animation.FuncAnimation(fig, animation_graph, interval=1000) 
+
+
+if __name__ == "__main__":
+
+    calculation_thread = multiprocessing.Process(target = cal.CalculateEuler(), args = ())
+    calculation_thread.daemon = True
+    calculation_thread.start()
+
+    animation_thread = multiprocessing.Process(target=animation_thread_function(), args=())
+    animation_thread.daemon = True
+    animation_thread.start()
 
 
 
+    calculation_thread.join()
+    animation_thread.join()
 
-# print("The final value of e is " + str(e))
-#print("This is outside the thread")
-print(len(cal.e_lst))
+
+
+    # plt.show()
+
+    # print("The final value of e is " + str(e))
+    #print("This is outside the thread")
+    print(len(cal.e_lst))
 
 

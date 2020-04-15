@@ -1,31 +1,34 @@
-#importing libraries
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+fig, ax = plt.subplots()
 
-fig = plt.figure()
-#creating a subplot 
-ax1 = fig.add_subplot(1,1,1)
+x = np.arange(0, 2*np.pi, 0.01)
+line, = ax.plot(x, np.sin(x))
+
+
+def init():  # only required for blitting to give a clean slate.
+    line.set_ydata([np.nan] * len(x))
+    return line,
+
 
 def animate(i):
-    data = open('testing/sample.txt','r').read()
-    lines = data.split('\n')
-    xs = []
-    ys = []
-   
-    for line in lines:
-        x, y = line.split(',') # Delimiter is comma    
-        xs.append(float(x))
-        ys.append(float(y))
-   
-    
-    ax1.clear()
-    ax1.plot(xs, ys)
+    line.set_ydata(np.sin(x + i / 100))  # update the data.
+    return line,
 
-    plt.xlabel('Date')
-    plt.ylabel('Price')
-    plt.title('Live graph with matplotlib')	
-	
-    
-ani = animation.FuncAnimation(fig, animate, interval=1000) 
+
+ani = animation.FuncAnimation(
+    fig, animate, init_func=init, interval=2, blit=True, save_count=50)
+
+# To save the animation, use e.g.
+#
+# ani.save("movie.mp4")
+#
+# or
+#
+# from matplotlib.animation import FFMpegWriter
+# writer = FFMpegWriter(fps=15, metadata=dict(artist='Me'), bitrate=1800)
+# ani.save("movie.mp4", writer=writer)
+
 plt.show()

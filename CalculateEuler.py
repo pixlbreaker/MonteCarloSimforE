@@ -18,17 +18,17 @@ def SimulationSum():
         count += 1
     return count
 
-def CalculateEuler(n):
+def CalculateEuler():
     '''
     Runs the simulation function constantly to get the value of e
     '''
     sumlist = []
     e = 0
-    while len(sumlist) != n:
+    while True:
         sumlist.append(SimulationSum())
         e = statistics.mean(sumlist)
         e_lst.append(e)
         print("On run " + str(len(sumlist)) + " e is " + str(e))
         # Sleeps for 50 ms
         time.sleep(50/1000)
-    return e
+    # return e
