@@ -4,6 +4,15 @@ import time
 
 e_lst = []
 
+def WriteValues(x_val, y_val):
+    '''
+    Writes the values to the data.csv file
+    '''
+    file = open("data.csv", "a")
+    file.write(str(x_val) + "," + str(y_val)+ "\n")
+    file.close()
+
+
 def SimulationSum():
     '''
     we take a random number from 0 to 1, then we take another one and add it to the first one and so on, while our sum is less than 1. ξ is a quantity of numbers taken. The mean value of ξ is the Euler's number, which is approximately 2,7182818284590452353602874713527…
@@ -31,4 +40,5 @@ def CalculateEuler():
         print("On run " + str(len(sumlist)) + " e is " + str(e))
         # Sleeps for 50 ms
         time.sleep(50/1000)
+        WriteValues(len(sumlist), e)
     # return e
